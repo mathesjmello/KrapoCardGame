@@ -24,5 +24,16 @@ namespace DefaultNamespace
         void SetKrapo();
     }
 
+    public interface IAddtable
+    {
+        void AddCard(Card card);
+
+    }
+
+    public interface IRecivable
+    {
+        void ReciveCard(Card card);
+    }
+
 
 }
