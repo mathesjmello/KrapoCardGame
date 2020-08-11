@@ -1,23 +1,27 @@
 ﻿
+using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Zenject;
 using Random = System.Random;
 
 namespace DefaultNamespace
 {
     public class MainDeck: MonoBehaviour, IDeckable
     {
+        public bool you;
         public Krapo krapo;
         public Card CardPrefab;
         private List<Card> deck;
         public Stack<Card> shuffledDeck;
+        [Inject] private GameManeger gm;
         private void Start()
         {
             shuffledDeck = new Stack<Card>();
             deck = new List<Card>();
             CardPrefab = Resources.Load<Card>("CardPrefab");
             DeckBuild();
-            Shuffle();
         }
 
 
@@ -28,6 +32,7 @@ namespace DefaultNamespace
                 var card = Instantiate(CardPrefab);
                 card.GenCard(i);
                 deck.Add(card);
+                card.SetParent(transform);
             }
             Shuffle();
         }
@@ -35,6 +40,10 @@ namespace DefaultNamespace
         public void Shuffle()
         {
             var rng = new Random();
+            if (you)
+            {
+                rng.Next();
+            }
             int n = deck.Count;
             for (int i = 0; i < 4; i++)
             {
@@ -54,11 +63,30 @@ namespace DefaultNamespace
                 card.gameObject.transform.parent = transform;
             }
             SetKrapo();
+            PrepareLines();
+        }
+
+        private void PrepareLines()
+        {
+            if (you)
+            {
+                foreach (var line in gm.lineDir)
+                {
+                    line.AddCard(shuffledDeck.Pop());
+                }
+            }
+            else
+            {
+                foreach (var line in gm.lineEsq)
+                {
+                    line.AddCard(shuffledDeck.Pop());
+                }
+            }
         }
 
         public void TurnCard()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void SetKrapo()

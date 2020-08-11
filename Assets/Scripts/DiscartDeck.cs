@@ -9,7 +9,7 @@ namespace DefaultNamespace
         public void AddCard(Card card)
         {
             _discartDeck.Push(card);
-            card.transform.parent = transform;
+            card.SetParent(transform);
         }
 
         public void ReciveCard(Card card)
@@ -18,6 +18,7 @@ namespace DefaultNamespace
             if (currentCard.suit == card.suit && (currentCard.num+1 == card.num || currentCard.num-1 == card.num))
             {
                 AddCard(card);
+                card.SetParent(transform);
             }
             else
             {

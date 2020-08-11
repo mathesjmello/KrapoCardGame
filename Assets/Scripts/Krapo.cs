@@ -16,7 +16,7 @@ namespace DefaultNamespace
         public void AddCard(Card card)
         {
             kDeck.Push(card);
-            card.gameObject.transform.parent = transform;
+            card.SetParent(transform);
         }
     }
 }
