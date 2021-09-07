@@ -122,7 +122,9 @@ MonoBehaviour:
   num: 0
   suit: 0
   color: 0
-  img: {fileID: 2069490334402623913}
+  CoverImg: {fileID: 0}
+  RealImg: {fileID: 0}
+  Img: {fileID: 2069490334402623913}
 --- !u!1 &7035683131084132203
 GameObject:
   m_ObjectHideFlags: 0

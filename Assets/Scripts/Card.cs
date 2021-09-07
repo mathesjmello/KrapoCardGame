@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -24,10 +25,17 @@ namespace DefaultNamespace
         public float num;
         public Suits suit;
         public Colors color;
-        public Image img;
-        [Inject] private GameManeger gm;
+        public Sprite CoverImg;
+        public Sprite RealImg;
+        private GameManeger gm;
+        public Image Img;
 
-    public void GenCard(int v)
+        private void Awake()
+        {
+            Img = GetComponentInChildren<Image>();
+            gm = FindObjectOfType<GameManeger>();
+        }
+        public void GenCard(int v)
         {
             switch (Mathf.Ceil(f: v/13))
             {
@@ -52,13 +60,16 @@ namespace DefaultNamespace
                     num = v - 39;
                     break;
             }
-            SetSprite(v);
-        }
 
-    private void SetSprite(int i)
-    {
-        var kappa = img.sprite;
-    }
+            CoverImg = gm.sprites[0];
+            RealImg = gm.sprites[v];
+            SetSprite();
+        }
+        
+        private void SetSprite()
+        {
+            Img.sprite = playable ? RealImg : CoverImg;
+        }
 
     public void SetParent(Transform p0)
         {
@@ -69,12 +80,14 @@ namespace DefaultNamespace
         public void EnableCard()
         {
             playable = true;
+            SetSprite();
         }
         
 
         public void DisableCard()
         {
             playable = false;
+            SetSprite();
         }
     }
 }

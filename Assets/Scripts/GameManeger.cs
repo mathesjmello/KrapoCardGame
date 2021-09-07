@@ -13,10 +13,6 @@ namespace DefaultNamespace
         public DiscartDeck yourDiscard;
         public List<MIddlePile> mpClub, mpDimonds , mpSpades , mpHearts;
         public Sprite[] sprites;
-        private void Awake()
-        {
-            sprites = Resources.LoadAll<Sprite>("card");
-        }
 
         public void CheckPile(Card card)
         {

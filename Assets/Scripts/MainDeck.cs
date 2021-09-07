@@ -51,9 +51,7 @@ namespace DefaultNamespace
                 {
                     n--;
                     int k = rng.Next(n + 1);
-                    var value = deck[k];
-                    deck[k] = deck[n];
-                    deck[n] = value;
+                    (deck[k], deck[n]) = (deck[n], deck[k]);
                 }
             }
             
