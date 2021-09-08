@@ -4,11 +4,11 @@ using DefaultNamespace;
 using UnityEngine;
 using Zenject;
 
-public class Line : MonoBehaviour, IAddtable
+public class Line : MonoBehaviour, IAddtable,IPickable
 {
     public Stack<Card> line= new Stack<Card>();
 
-    [Inject] private GameManeger gm;
+    [Inject] private StartManager _sm;
    
     public void AddCard(Card card)
     {
@@ -17,7 +17,7 @@ public class Line : MonoBehaviour, IAddtable
             line.Push(card);
             card.SetParent(transform);
             card.EnableCard();
-            gm.CheckPile(card);
+            _sm.CheckPile(card);
         }
         else
         {
@@ -31,5 +31,10 @@ public class Line : MonoBehaviour, IAddtable
             }
         }
     }
-    
+
+    public Card PickCard(out Card c)
+    {
+        c = line.Pop();
+        return c;
+    }
 }

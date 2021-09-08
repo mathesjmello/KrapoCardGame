@@ -6,8 +6,11 @@ public class GameInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        var gm = FindObjectOfType<GameManeger>();
-        
-        Container.Bind<GameManeger>().FromInstance(gm).AsSingle();
+        var sm = FindObjectOfType<StartManager>();
+        var mpm = FindObjectOfType<MiddlePileManager>();
+
+
+        Container.Bind<MiddlePileManager>().FromInstance(mpm).AsSingle();
+        Container.Bind<StartManager>().FromInstance(sm).AsSingle();
     }
 }

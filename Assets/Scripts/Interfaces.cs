@@ -18,9 +18,7 @@ namespace DefaultNamespace
     {
         void DeckBuild();
         void Shuffle();
-
-        void TurnCard();
-
+        
         void SetKrapo();
     }
 
@@ -33,6 +31,11 @@ namespace DefaultNamespace
     public interface IRecivable
     {
         void ReciveCard(Card card);
+    }
+
+    public interface IPickable
+    {
+        Card PickCard(out Card c);
     }
 
 

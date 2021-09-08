@@ -8,14 +8,14 @@ using Random = System.Random;
 
 namespace DefaultNamespace
 {
-    public class MainDeck: MonoBehaviour, IDeckable
+    public class MainDeck: MonoBehaviour, IDeckable, IPickable
     {
         public bool you;
         public Krapo krapo;
         public Card CardPrefab;
         private List<Card> deck;
         public Stack<Card> shuffledDeck;
-        [Inject] private GameManeger gm;
+        [Inject] private StartManager _sm;
         private void Start()
         {
             shuffledDeck = new Stack<Card>();
@@ -68,23 +68,18 @@ namespace DefaultNamespace
         {
             if (you)
             {
-                foreach (var line in gm.lineDir)
+                foreach (var line in _sm.lineDir)
                 {
                     line.AddCard(shuffledDeck.Pop());
                 }
             }
             else
             {
-                foreach (var line in gm.lineEsq)
+                foreach (var line in _sm.lineEsq)
                 {
                     line.AddCard(shuffledDeck.Pop());
                 }
             }
-        }
-
-        public void TurnCard()
-        {
-            
         }
 
         public void SetKrapo()
@@ -93,6 +88,13 @@ namespace DefaultNamespace
             {
                 krapo.AddCard(shuffledDeck.Pop());
             }
+            krapo.TurnLastCard();
+        }
+
+        public Card PickCard(out Card c)
+        {
+            c = shuffledDeck.Pop();
+            return c;
         }
     }
 }

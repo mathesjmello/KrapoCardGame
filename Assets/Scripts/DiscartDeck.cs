@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class DiscartDeck : MonoBehaviour, IAddtable, IRecivable
+    public class DiscartDeck : MonoBehaviour, IAddtable, IRecivable , IPickable
     {
         private Stack<Card> _discartDeck = new Stack<Card>();
         public void AddCard(Card card)
@@ -24,6 +24,12 @@ namespace DefaultNamespace
             {
                 Debug.LogError("invalid command");
             }
+        }
+
+        public Card PickCard(out Card c)
+        {
+            c = _discartDeck.Pop();
+            return c;
         }
     }
 }

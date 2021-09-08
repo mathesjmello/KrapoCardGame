@@ -27,13 +27,17 @@ namespace DefaultNamespace
         public Colors color;
         public Sprite CoverImg;
         public Sprite RealImg;
-        private GameManeger gm;
+        [Inject]private StartManager _sm;
+        [Inject] private MiddlePileManager _mgm;
+        private Canvas _canvas;
         public Image Img;
 
         private void Awake()
         {
+            _canvas = GetComponentInChildren<Canvas>();
             Img = GetComponentInChildren<Image>();
-            gm = FindObjectOfType<GameManeger>();
+            _sm = FindObjectOfType<StartManager>();
+            _mgm = FindObjectOfType<MiddlePileManager>();
         }
         public void GenCard(int v)
         {
@@ -61,8 +65,8 @@ namespace DefaultNamespace
                     break;
             }
 
-            CoverImg = gm.sprites[0];
-            RealImg = gm.sprites[v];
+            CoverImg = _sm.sprites[0];
+            RealImg = _sm.sprites[v];
             SetSprite();
         }
         
@@ -79,13 +83,16 @@ namespace DefaultNamespace
 
         public void EnableCard()
         {
+            _canvas.sortingOrder = 1; 
             playable = true;
             SetSprite();
+            _mgm.CheckCard(this);
         }
         
 
         public void DisableCard()
         {
+            _canvas.sortingOrder = -1; 
             playable = false;
             SetSprite();
         }
