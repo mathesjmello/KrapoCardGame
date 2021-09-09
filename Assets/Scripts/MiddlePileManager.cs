@@ -20,7 +20,9 @@ namespace DefaultNamespace
             {
                 if (card.num == pile.pile.Count+1 && card.suit == (Card.Suits) pile.suits)
                 {
+                    Debug.Log("achei");
                     pile.AddCard(card);
+                    
                     break;
                 }
             }

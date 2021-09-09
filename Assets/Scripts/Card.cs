@@ -22,7 +22,8 @@ namespace DefaultNamespace
         }
 
         private bool playable;
-        public float num;
+        public bool Picked;
+        public int num;
         public Suits suit;
         public Colors color;
         public Sprite CoverImg;
@@ -39,26 +40,42 @@ namespace DefaultNamespace
             _sm = FindObjectOfType<StartManager>();
             _mgm = FindObjectOfType<MiddlePileManager>();
         }
+
+        private void Update()
+        {
+            if (Picked)
+            {
+                FollowMouse();
+            }
+        }
+
+        private void FollowMouse()
+        {
+            
+            var mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(mPos.x, mPos.y, 3);
+        }
+
         public void GenCard(int v)
         {
             switch (Mathf.Ceil(f: v/13))
             {
-                case 1:
+                case 0:
                     suit = Suits.Clubs;
-                    color = Colors.Red;
+                    color = Colors.Black;
                     num = v;
                     break;
-                case 2:
+                case 1:
                     suit = Suits.Diamonds;
                     color = Colors.Red;
                     num = v - 13;
                     break;
-                case 3:
+                case 2:
                     suit = Suits.Hearts;
-                    color = Colors.Black;
+                    color = Colors.Red;
                     num = v - 26;
                     break;
-                case 4:
+                case 3:
                     suit = Suits.Spades;
                     color = Colors.Black;
                     num = v - 39;
@@ -70,12 +87,12 @@ namespace DefaultNamespace
             SetSprite();
         }
         
-        private void SetSprite()
+        public void SetSprite()
         {
             Img.sprite = playable ? RealImg : CoverImg;
         }
 
-    public void SetParent(Transform p0)
+        public void SetParent(Transform p0)
         {
             transform.parent = p0;
             transform.localPosition = Vector3.zero;
@@ -89,12 +106,11 @@ namespace DefaultNamespace
             _mgm.CheckCard(this);
         }
         
-
         public void DisableCard()
         {
-            _canvas.sortingOrder = -1; 
+            _canvas.sortingOrder = 0; 
             playable = false;
-            SetSprite();
+            //SetSprite();
         }
     }
 }

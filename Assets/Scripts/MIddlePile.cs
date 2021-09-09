@@ -18,8 +18,10 @@ public class MIddlePile : MonoBehaviour, IAddtable
 
     public void AddCard(Card card)
     {
+        card.Picked = false;
         pile.Push(card);
         card.SetParent(transform);
-        card.DisableCard();
+        card.transform.position = transform.position;
+        card.SetSprite();
     }
 }

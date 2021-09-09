@@ -1,7 +1,6 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using Zenject;
 using Random = System.Random;
@@ -10,12 +9,13 @@ namespace DefaultNamespace
 {
     public class MainDeck: MonoBehaviour, IDeckable, IPickable
     {
-        public bool you;
+        public bool Other;
         public Krapo krapo;
         public Card CardPrefab;
         private List<Card> deck;
         public Stack<Card> shuffledDeck;
         [Inject] private StartManager _sm;
+        [Inject] private MiddlePileManager _mpm;
         private void Start()
         {
             shuffledDeck = new Stack<Card>();
@@ -40,7 +40,7 @@ namespace DefaultNamespace
         public void Shuffle()
         {
             var rng = new Random();
-            if (you)
+            if (Other)
             {
                 rng.Next();
             }
@@ -61,27 +61,8 @@ namespace DefaultNamespace
                 card.gameObject.transform.parent = transform;
             }
             SetKrapo();
-            PrepareLines();
         }
-
-        private void PrepareLines()
-        {
-            if (you)
-            {
-                foreach (var line in _sm.lineDir)
-                {
-                    line.AddCard(shuffledDeck.Pop());
-                }
-            }
-            else
-            {
-                foreach (var line in _sm.lineEsq)
-                {
-                    line.AddCard(shuffledDeck.Pop());
-                }
-            }
-        }
-
+        
         public void SetKrapo()
         {
             for (int i = 0; i < 13; i++)
@@ -89,11 +70,48 @@ namespace DefaultNamespace
                 krapo.AddCard(shuffledDeck.Pop());
             }
             krapo.TurnLastCard();
+            PrepareLines();
+        }
+
+        private void PrepareLines()
+        {
+            if (Other)
+            {
+                foreach (var line in _sm.lineDir)
+                {
+                    if (shuffledDeck.Peek().num != 1)
+                    {
+                        line.AddCard(shuffledDeck.Pop());
+                    }
+                    else
+                    {
+                        _mpm.CheckCard(shuffledDeck.Pop());
+                    }
+                    
+                }
+            }
+            else
+            {
+                foreach (var line in _sm.lineEsq)
+                {
+                    if (shuffledDeck.Peek().num != 1)
+                    {
+                        Debug.Log("joga na linha");
+                        line.AddCard(shuffledDeck.Pop());
+                    }
+                    else
+                    {
+                        Debug.Log("jogar no meio");
+                        _mpm.CheckCard(shuffledDeck.Pop());
+                    }
+                }
+            }
         }
 
         public Card PickCard(out Card c)
         {
             c = shuffledDeck.Pop();
+            c.EnableCard();
             return c;
         }
     }

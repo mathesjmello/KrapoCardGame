@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
@@ -7,9 +8,7 @@ using Zenject;
 public class Line : MonoBehaviour, IAddtable,IPickable
 {
     public Stack<Card> line= new Stack<Card>();
-
-    [Inject] private StartManager _sm;
-   
+    public int CardsCount;
     public void AddCard(Card card)
     {
         if (line.Count == 0)
@@ -17,7 +16,6 @@ public class Line : MonoBehaviour, IAddtable,IPickable
             line.Push(card);
             card.SetParent(transform);
             card.EnableCard();
-            _sm.CheckPile(card);
         }
         else
         {
@@ -30,6 +28,11 @@ public class Line : MonoBehaviour, IAddtable,IPickable
                 card.EnableCard();
             }
         }
+    }
+
+    private void Update()
+    {
+        CardsCount = line.Count;
     }
 
     public Card PickCard(out Card c)

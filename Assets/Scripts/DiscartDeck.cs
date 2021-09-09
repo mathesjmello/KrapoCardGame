@@ -5,6 +5,7 @@ namespace DefaultNamespace
 {
     public class DiscartDeck : MonoBehaviour, IAddtable, IRecivable , IPickable
     {
+        public bool empty;
         private Stack<Card> _discartDeck = new Stack<Card>();
         public void AddCard(Card card)
         {
@@ -28,7 +29,7 @@ namespace DefaultNamespace
 
         public Card PickCard(out Card c)
         {
-            c = _discartDeck.Pop();
+            c = empty ? _discartDeck.Pop() : null;
             return c;
         }
     }
