@@ -38,5 +38,10 @@ namespace DefaultNamespace
         Card PickCard(out Card c);
     }
 
+    public interface ICheckable
+    {
+        bool CheckCard(Card c);
+    }
+
 
 }

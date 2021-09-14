@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class DiscartDeck : MonoBehaviour, IAddtable, IRecivable , IPickable
+    public class DiscartDeck : MonoBehaviour, IAddtable , IPickable, ICheckable
     {
         public bool empty;
         private Stack<Card> _discartDeck = new Stack<Card>();
@@ -13,24 +13,20 @@ namespace DefaultNamespace
             card.SetParent(transform);
         }
 
-        public void ReciveCard(Card card)
-        {
-            var currentCard = _discartDeck.Peek();
-            if (currentCard.suit == card.suit && (currentCard.num+1 == card.num || currentCard.num-1 == card.num))
-            {
-                AddCard(card);
-                card.SetParent(transform);
-            }
-            else
-            {
-                Debug.LogError("invalid command");
-            }
-        }
-
         public Card PickCard(out Card c)
         {
             c = empty ? _discartDeck.Pop() : null;
             return c;
+        }
+
+        public bool CheckCard(Card c)
+        {
+            var currentCard = _discartDeck.Peek();
+            if (currentCard.suit == c.suit && (currentCard.num + 1 == c.num || currentCard.num - 1 == c.num))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

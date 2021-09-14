@@ -83,7 +83,7 @@ namespace DefaultNamespace
             }
 
             CoverImg = _sm.sprites[0];
-            RealImg = _sm.sprites[v];
+            RealImg = _sm.sprites[v+1];
             SetSprite();
         }
         
@@ -103,7 +103,6 @@ namespace DefaultNamespace
             _canvas.sortingOrder = 1; 
             playable = true;
             SetSprite();
-            _mgm.CheckCard(this);
         }
         
         public void DisableCard()

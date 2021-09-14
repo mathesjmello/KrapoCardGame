@@ -9,17 +9,18 @@ namespace DefaultNamespace
 {
     public class MainDeck: MonoBehaviour, IDeckable, IPickable
     {
+        public int test;
         public bool Other;
         public Krapo krapo;
         public Card CardPrefab;
-        private List<Card> deck;
-        public Stack<Card> shuffledDeck;
+        private List<Card> deck = new List<Card>();
+        public Stack<Card> shuffledDeck = new Stack<Card>();
         [Inject] private StartManager _sm;
         [Inject] private MiddlePileManager _mpm;
         private void Start()
         {
-            shuffledDeck = new Stack<Card>();
-            deck = new List<Card>();
+            // shuffledDeck = new Stack<Card>();
+            // deck = new List<Card>();
             CardPrefab = Resources.Load<Card>("CardPrefab");
             DeckBuild();
         }
@@ -27,13 +28,13 @@ namespace DefaultNamespace
 
         public void DeckBuild()
         {
-            for (int i = 1; i < 53; i++)
+            for (int i = 0; i < 52; i++)
             {
                 var card = Instantiate(CardPrefab);
                 card.GenCard(i);
                 deck.Add(card);
                 card.SetParent(transform);
-            }
+            } 
             Shuffle();
         }
 
@@ -79,13 +80,17 @@ namespace DefaultNamespace
             {
                 foreach (var line in _sm.lineDir)
                 {
-                    if (shuffledDeck.Peek().num != 1)
+                    test = shuffledDeck.Peek().num;
+                    if (shuffledDeck.Peek().num != 0)
                     {
                         line.AddCard(shuffledDeck.Pop());
                     }
                     else
                     {
-                        _mpm.CheckCard(shuffledDeck.Pop());
+                        if (_mpm.CheckCard(shuffledDeck.Peek()))
+                        {
+                            _mpm.PushCard(shuffledDeck.Pop());
+                        }
                     }
                     
                 }
@@ -94,15 +99,16 @@ namespace DefaultNamespace
             {
                 foreach (var line in _sm.lineEsq)
                 {
-                    if (shuffledDeck.Peek().num != 1)
+                    if (shuffledDeck.Peek().num != 0)
                     {
-                        Debug.Log("joga na linha");
                         line.AddCard(shuffledDeck.Pop());
                     }
                     else
                     {
-                        Debug.Log("jogar no meio");
-                        _mpm.CheckCard(shuffledDeck.Pop());
+                        if (_mpm.CheckCard(shuffledDeck.Peek()))
+                        {
+                            _mpm.PushCard(shuffledDeck.Pop());
+                        }
                     }
                 }
             }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
 
-public class MIddlePile : MonoBehaviour, IAddtable
+public class MiddlePile : MonoBehaviour, IAddtable
 {
     public Stack<Card> pile =new Stack<Card>();
     public Suits suits;

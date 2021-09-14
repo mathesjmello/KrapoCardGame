@@ -9,9 +9,7 @@ namespace DefaultNamespace
     {
     public List<Line> lineEsq;
     public List<Line> lineDir;
-    public DiscartDeck myDiscard;
-    public DiscartDeck yourDiscard;
-    public List<MIddlePile> mpClub, mpDimonds, mpSpades, mpHearts;
+    public List<MiddlePile> mpClub, mpDimonds, mpSpades, mpHearts;
     public Sprite[] sprites;
 
     private void Awake()

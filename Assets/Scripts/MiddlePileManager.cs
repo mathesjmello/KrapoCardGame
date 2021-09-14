@@ -7,25 +7,30 @@ namespace DefaultNamespace
 {
     public class MiddlePileManager: MonoBehaviour
     {
-        public List<MIddlePile> Piles = new List<MIddlePile>();
-
+        public List<MiddlePile> Piles = new List<MiddlePile>();
+        public MiddlePile oneToSend;
         private void Start()
         {
-            Piles = FindObjectsOfType<MIddlePile>().ToList();
+            Piles = FindObjectsOfType<MiddlePile>().ToList();
         }
 
-        public void CheckCard(Card card)
+        public bool CheckCard(Card card)
         {
             foreach (var pile in Piles)
             {
-                if (card.num == pile.pile.Count+1 && card.suit == (Card.Suits) pile.suits)
+                if (card.num == pile.pile.Count && (int) pile.suits == (int) card.suit)
                 {
-                    Debug.Log("achei");
-                    pile.AddCard(card);
-                    
-                    break;
+                    Debug.Log($"carta {card.num} de nipe {card.suit} entra aqui {pile.suits}");
+                    oneToSend = pile;
+                    return true;
                 }
             }
+            return false;
+        }
+
+        public void PushCard(Card card)
+        {
+            oneToSend.AddCard(card);
         }
     }
 }

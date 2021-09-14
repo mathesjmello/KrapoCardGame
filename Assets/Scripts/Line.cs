@@ -5,29 +5,40 @@ using DefaultNamespace;
 using UnityEngine;
 using Zenject;
 
-public class Line : MonoBehaviour, IAddtable,IPickable
+public class Line : MonoBehaviour, IAddtable,IPickable, ICheckable
 {
     public Stack<Card> line= new Stack<Card>();
     public int CardsCount;
     public void AddCard(Card card)
     {
+        if (line.Count != 0)
+        {
+            var currentCard = line.Peek();
+            if (currentCard!=null)
+            {
+                currentCard.DisableCard();
+            }
+        }
+        line.Push(card);
+        card.SetParent(transform);
+        card.EnableCard();
+    }
+
+    public bool CheckCard(Card card)
+    {
         if (line.Count == 0)
         {
-            line.Push(card);
-            card.SetParent(transform);
-            card.EnableCard();
+            return true;
         }
         else
         {
             var currentCard = line.Peek();
-            if (currentCard.color!= card.color && currentCard.num-1 == card.num)
+            if (currentCard.color != card.color && currentCard.num - 1 == card.num)
             {
-                currentCard.DisableCard();
-                line.Push(card);
-                card.SetParent(transform);
-                card.EnableCard();
+                return true;
             }
         }
+        return false;
     }
 
     private void Update()

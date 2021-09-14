@@ -36,19 +36,25 @@ namespace DefaultNamespace
                             if (SelectedCard!=null)
                             {
                                 SelectedCard.Picked = true;
-                                mpm.CheckCard(SelectedCard);
+                                if(mpm.CheckCard(SelectedCard))
+                                {
+                                    mpm.PushCard(SelectedCard);
+                                };
                             }
                         }
-                        
                     }
                     else
                     {
                         var newPlace = hit.transform;
+                        var check = newPlace.GetComponent<ICheckable>();
                         var place = newPlace.GetComponent<IAddtable>();
                         var krapo = LastPlace.GetComponent<Krapo>();
-                        place.AddCard(SelectedCard);
-                        SelectedCard.Picked = false;
-                        SelectedCard = null;
+                        if (check.CheckCard(SelectedCard))
+                        {
+                            place.AddCard(SelectedCard);
+                            SelectedCard.Picked = false;
+                            SelectedCard = null;
+                        }
                         if (krapo!= null)
                         {
                             krapo.TurnLastCard();
