@@ -8,7 +8,6 @@ using Zenject;
 public class Line : MonoBehaviour, IAddtable,IPickable, ICheckable
 {
     public Stack<Card> line= new Stack<Card>();
-    public int CardsCount;
     public void AddCard(Card card)
     {
         if (line.Count != 0)
@@ -16,12 +15,12 @@ public class Line : MonoBehaviour, IAddtable,IPickable, ICheckable
             var currentCard = line.Peek();
             if (currentCard!=null)
             {
-                currentCard.DisableCard();
+                currentCard.DisableCard(line.Count);
             }
         }
         line.Push(card);
-        card.SetParent(transform);
-        card.EnableCard();
+        card.SetParent(transform,line.Count-1);
+        card.EnableCard(line.Count);
     }
 
     public bool CheckCard(Card card)
@@ -40,11 +39,7 @@ public class Line : MonoBehaviour, IAddtable,IPickable, ICheckable
         }
         return false;
     }
-
-    private void Update()
-    {
-        CardsCount = line.Count;
-    }
+    
 
     public Card PickCard(out Card c)
     {

@@ -20,8 +20,8 @@ public class MiddlePile : MonoBehaviour, IAddtable
     {
         card.Picked = false;
         pile.Push(card);
-        card.SetParent(transform);
+        card.SetParent(transform,0);
         card.transform.position = transform.position;
-        card.SetSprite();
+        card.MiddleCard();
     }
 }

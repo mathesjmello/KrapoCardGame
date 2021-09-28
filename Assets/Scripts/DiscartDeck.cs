@@ -10,7 +10,8 @@ namespace DefaultNamespace
         public void AddCard(Card card)
         {
             _discartDeck.Push(card);
-            card.SetParent(transform);
+            card.SetParent(transform,0);
+            card.DisableCard(_discartDeck.Count);
         }
 
         public Card PickCard(out Card c)

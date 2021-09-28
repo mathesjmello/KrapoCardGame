@@ -9,23 +9,20 @@ namespace DefaultNamespace
 {
     public class MainDeck: MonoBehaviour, IDeckable, IPickable
     {
-        public int test;
         public bool Other;
         public Krapo krapo;
         public Card CardPrefab;
         private List<Card> deck = new List<Card>();
         public Stack<Card> shuffledDeck = new Stack<Card>();
+        [Inject] private TurnManager _tm;
         [Inject] private StartManager _sm;
         [Inject] private MiddlePileManager _mpm;
         private void Start()
         {
-            // shuffledDeck = new Stack<Card>();
-            // deck = new List<Card>();
             CardPrefab = Resources.Load<Card>("CardPrefab");
             DeckBuild();
         }
-
-
+        
         public void DeckBuild()
         {
             for (int i = 0; i < 52; i++)
@@ -33,7 +30,7 @@ namespace DefaultNamespace
                 var card = Instantiate(CardPrefab);
                 card.GenCard(i);
                 deck.Add(card);
-                card.SetParent(transform);
+                card.SetParent(transform,0);
             } 
             Shuffle();
         }
@@ -80,14 +77,14 @@ namespace DefaultNamespace
             {
                 foreach (var line in _sm.lineDir)
                 {
-                    test = shuffledDeck.Peek().num;
-                    if (shuffledDeck.Peek().num != 0)
+                    var peek = shuffledDeck.Peek();
+                    if (peek.num != 0)
                     {
                         line.AddCard(shuffledDeck.Pop());
                     }
                     else
                     {
-                        if (_mpm.CheckCard(shuffledDeck.Peek()))
+                        if (_mpm.CheckCard(peek))
                         {
                             _mpm.PushCard(shuffledDeck.Pop());
                         }
@@ -112,12 +109,13 @@ namespace DefaultNamespace
                     }
                 }
             }
+            _tm.PlayerCheck();
         }
 
         public Card PickCard(out Card c)
         {
             c = shuffledDeck.Pop();
-            c.EnableCard();
+            c.EnableCard(shuffledDeck.Count);
             return c;
         }
     }

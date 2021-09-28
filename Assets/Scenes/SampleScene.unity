@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 63954392}
   - component: {fileID: 63954391}
   - component: {fileID: 63954393}
+  - component: {fileID: 63954394}
   m_Layer: 0
   m_Name: Gamemanegers
   m_TagString: Untagged
@@ -246,6 +247,19 @@ MonoBehaviour:
   - {fileID: 54030200}
   - {fileID: 0}
   sprites: []
+--- !u!114 &63954394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63954390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6835ba70f99462b85aa46776853e00f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCount: 0
 --- !u!1 &118229216
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,7 +290,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &118229218
 BoxCollider2D:
@@ -417,7 +431,7 @@ Transform:
   m_LocalScale: {x: 0.6637277, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &258670386
 MonoBehaviour:
@@ -461,7 +475,7 @@ Transform:
   m_LocalScale: {x: 0.6637277, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &434021344
 MonoBehaviour:
@@ -788,7 +802,7 @@ Transform:
   m_LocalScale: {x: 0.6637277, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &853433369
 MonoBehaviour:
@@ -803,6 +817,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   suits: 1
+--- !u!1 &869095884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 869095885}
+  - component: {fileID: 869095886}
+  m_Layer: 0
+  m_Name: player (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &869095885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869095884}
+  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: -1120, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2053262366}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &869095886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869095884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a66edf83b39d4c948e335c4cb336521a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 0
+  krapo: {fileID: 818156017}
+  SelectedCard: {fileID: 0}
+  LastPlace: {fileID: 0}
+  myDeck: {fileID: 1922671225}
+  dDeck: {fileID: 1735747872}
+  mpm: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1125,7 @@ Transform:
   m_LocalScale: {x: 0.6637277, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1042712807
 MonoBehaviour:
@@ -1221,7 +1285,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1404830821
 BoxCollider2D:
@@ -1292,7 +1356,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1648466753
 BoxCollider2D:
@@ -1363,7 +1427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2053262366}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1709492972
 BoxCollider2D:
@@ -1548,10 +1612,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66edf83b39d4c948e335c4cb336521a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turn: 0
+  krapo: {fileID: 970995661}
   SelectedCard: {fileID: 0}
   LastPlace: {fileID: 0}
   myDeck: {fileID: 2059292312}
-  yourDeck: {fileID: 0}
   dDeck: {fileID: 518579412}
   mpm: {fileID: 0}
 --- !u!4 &1791026570
@@ -1757,6 +1822,7 @@ Transform:
   - {fileID: 1922671223}
   - {fileID: 818156015}
   - {fileID: 1735747870}
+  - {fileID: 869095885}
   - {fileID: 1648466752}
   - {fileID: 1709492971}
   - {fileID: 1404830820}

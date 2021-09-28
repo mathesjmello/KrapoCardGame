@@ -92,24 +92,31 @@ namespace DefaultNamespace
             Img.sprite = playable ? RealImg : CoverImg;
         }
 
-        public void SetParent(Transform p0)
+        public void SetParent(Transform p0, int n)
         {
             transform.parent = p0;
-            transform.localPosition = Vector3.zero;
+            transform.localPosition = new Vector3(n*30, 0, 0 );
         }
 
-        public void EnableCard()
+        public void EnableCard(int i)
         {
-            _canvas.sortingOrder = 1; 
+            _canvas.sortingOrder = i; 
             playable = true;
             SetSprite();
         }
         
-        public void DisableCard()
+        public void DisableCard(int i)
         {
-            _canvas.sortingOrder = 0; 
+            _canvas.sortingOrder = i; 
             playable = false;
             //SetSprite();
+        }
+        
+        public void MiddleCard()
+        {
+            _canvas.sortingOrder= num;
+            playable = false;
+            Img.sprite = RealImg;
         }
     }
 }

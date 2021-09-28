@@ -1,17 +1,19 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace DefaultNamespace
 {
     public class Player : MonoBehaviour
     {
+        public bool turn;
+        public Krapo krapo;
         public Card SelectedCard;
         public Transform LastPlace;
-        public MainDeck myDeck;
-        public MainDeck yourDeck;
         public DiscartDeck dDeck;
         public MiddlePileManager mpm;
+        [Inject] private TurnManager _tm;
 
         private void Start()
         {
@@ -19,6 +21,14 @@ namespace DefaultNamespace
         }
 
         private void Update()
+        {
+            if (turn)
+            {
+                CheckInputs();
+            }
+        }
+
+        private void CheckInputs()
         {
             if (Input.GetMouseButtonUp(0))
             {
@@ -28,6 +38,7 @@ namespace DefaultNamespace
                 {
                     if (SelectedCard==null)
                     {
+                        
                         LastPlace = hit.transform;
                         var pick = LastPlace.GetComponent<IPickable>();
                         if (LastPlace.GetComponentInChildren<Card>())
@@ -39,6 +50,8 @@ namespace DefaultNamespace
                                 if(mpm.CheckCard(SelectedCard))
                                 {
                                     mpm.PushCard(SelectedCard);
+                                    SelectedCard.Picked = false;
+                                    SelectedCard = null;
                                 };
                             }
                         }
@@ -55,7 +68,7 @@ namespace DefaultNamespace
                             SelectedCard.Picked = false;
                             SelectedCard = null;
                         }
-                        if (krapo!= null)
+                        if (krapo!= null && krapo.kDeck.Count!=0)
                         {
                             krapo.TurnLastCard();
                         }
@@ -65,6 +78,8 @@ namespace DefaultNamespace
             }
             if (Input.GetMouseButtonUp(1))
             {
+                if (SelectedCard == null)return;
+               
                 SelectedCard.Picked = false;
                 if (LastPlace.GetComponent<IAddtable>()!= null)
                 {
@@ -73,8 +88,8 @@ namespace DefaultNamespace
                 else
                 {
                     dDeck.AddCard(SelectedCard);
+                    _tm.ChangeTurns();
                 }
-
                 SelectedCard = null;
             }
         }
