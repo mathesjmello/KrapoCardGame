@@ -72,6 +72,10 @@ namespace DefaultNamespace
                         {
                             krapo.TurnLastCard();
                         }
+                        else
+                        {
+                            dDeck.empty = true;
+                        }
                     }
                     
                 }

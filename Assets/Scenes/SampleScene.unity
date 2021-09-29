@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 63954391}
   - component: {fileID: 63954393}
   - component: {fileID: 63954394}
+  - component: {fileID: 63954395}
   m_Layer: 0
   m_Name: Gamemanegers
   m_TagString: Untagged
@@ -260,6 +261,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCount: 0
+--- !u!114 &63954395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63954390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332c8ed431054683b50874914c6d9c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Lines: []
+  HaveEmpty: 0
 --- !u!1 &118229216
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +320,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 103.45422, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -316,7 +331,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 383.5321, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!114 &118229219
 MonoBehaviour:
@@ -330,7 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!1 &152646088
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!4 &152646090
 Transform:
   m_ObjectHideFlags: 0
@@ -389,7 +404,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 112.944214, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -400,7 +415,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 402.5121, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!1 &258670384
 GameObject:
@@ -520,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!4 &495593977
 Transform:
   m_ObjectHideFlags: 0
@@ -548,7 +563,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 109.14429, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -559,7 +574,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 394.91223, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!1 &518579411
 GameObject:
@@ -662,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!4 &751317259
 Transform:
   m_ObjectHideFlags: 0
@@ -690,7 +705,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 110.49811, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -701,7 +716,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 397.61987, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!1 &818156014
 GameObject:
@@ -864,7 +879,6 @@ MonoBehaviour:
   krapo: {fileID: 818156017}
   SelectedCard: {fileID: 0}
   LastPlace: {fileID: 0}
-  myDeck: {fileID: 1922671225}
   dDeck: {fileID: 1735747872}
   mpm: {fileID: 0}
 --- !u!1 &963194225
@@ -1214,7 +1228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!4 &1377839188
 Transform:
   m_ObjectHideFlags: 0
@@ -1242,7 +1256,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 109.53107, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1253,7 +1267,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 395.6858, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!1 &1404830819
 GameObject:
@@ -1300,7 +1314,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 103.45422, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1311,7 +1325,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 383.5321, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!114 &1404830822
 MonoBehaviour:
@@ -1325,7 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!1 &1648466751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1385,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 105.608154, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1382,7 +1396,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 387.83997, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!114 &1648466754
 MonoBehaviour:
@@ -1396,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!1 &1709492970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1442,7 +1456,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 105.70322, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1453,7 +1467,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 176.62366, y: 246.31348}
+  m_Size: {x: 388.0301, y: 246.31348}
   m_EdgeRadius: 0
 --- !u!114 &1709492973
 MonoBehaviour:
@@ -1467,7 +1481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e530ae29c80d3f41afca3f447455cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardsCount: 0
+  empty: 0
 --- !u!1 &1735747869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,7 +1630,6 @@ MonoBehaviour:
   krapo: {fileID: 970995661}
   SelectedCard: {fileID: 0}
   LastPlace: {fileID: 0}
-  myDeck: {fileID: 2059292312}
   dDeck: {fileID: 518579412}
   mpm: {fileID: 0}
 --- !u!4 &1791026570

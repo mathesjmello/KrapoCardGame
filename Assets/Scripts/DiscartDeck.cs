@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace DefaultNamespace
 {
@@ -7,6 +8,7 @@ namespace DefaultNamespace
     {
         public bool empty;
         private Stack<Card> _discartDeck = new Stack<Card>();
+        [Inject] private LinesManager _lm;
         public void AddCard(Card card)
         {
             _discartDeck.Push(card);
@@ -16,7 +18,7 @@ namespace DefaultNamespace
 
         public Card PickCard(out Card c)
         {
-            c = empty ? _discartDeck.Pop() : null;
+            c = empty&&_lm.HaveEmpty ? _discartDeck.Pop() : null;
             return c;
         }
 
