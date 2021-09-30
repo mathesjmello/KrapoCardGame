@@ -20,7 +20,6 @@ namespace DefaultNamespace
             {
                 if (card.num == pile.pile.Count && (int) pile.suits == (int) card.suit)
                 {
-                    Debug.Log($"carta {card.num} de nipe {card.suit} entra aqui {pile.suits}");
                     oneToSend = pile;
                     return true;
                 }

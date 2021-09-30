@@ -111,6 +111,16 @@ namespace DefaultNamespace
             playable = false;
             //SetSprite();
         }
+
+        public void FlipCard()
+        {
+            SetSprite();
+        }
+
+        public void PushUp()
+        {
+            _canvas.sortingOrder = 60;
+        }
         
         public void MiddleCard()
         {

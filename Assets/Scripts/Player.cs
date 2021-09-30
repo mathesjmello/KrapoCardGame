@@ -9,11 +9,13 @@ namespace DefaultNamespace
     {
         public bool turn;
         public Krapo krapo;
-        public Card SelectedCard;
-        public Transform LastPlace;
+        public Card selectedCard;
+        public Transform lastPlace;
         public DiscartDeck dDeck;
+        public MainDeck mDeck;
         public MiddlePileManager mpm;
         [Inject] private TurnManager _tm;
+        [Inject] private LinesManager _lm;
 
         private void Start()
         {
@@ -36,22 +38,33 @@ namespace DefaultNamespace
                 RaycastHit2D hit =Physics2D.Raycast(ray, Vector2.zero); 
                 if ( hit.collider != null)
                 {
-                    if (SelectedCard==null)
+                    if (selectedCard==null)
                     {
                         
-                        LastPlace = hit.transform;
-                        var pick = LastPlace.GetComponent<IPickable>();
-                        if (LastPlace.GetComponentInChildren<Card>())
+                        lastPlace = hit.transform;
+                        var pick = lastPlace.GetComponent<IPickable>();
+                        if (lastPlace.GetComponentInChildren<Card>())
                         {
-                            SelectedCard = pick.PickCard(out _);
-                            if (SelectedCard!=null)
+                            selectedCard = pick.PickCard(out _);
+                            
+                            if (mDeck.Empty && !_lm.HaveEmpty)
                             {
-                                SelectedCard.Picked = true;
-                                if(mpm.CheckCard(SelectedCard))
+                                if (selectedCard == null)
                                 {
-                                    mpm.PushCard(SelectedCard);
-                                    SelectedCard.Picked = false;
-                                    SelectedCard = null;
+                                    dDeck.SendMain();
+                                    return;
+                                }
+                                
+                            }
+                            if (selectedCard!=null)
+                            {
+                                selectedCard.Picked = true;
+                                selectedCard.PushUp();
+                                if(mpm.CheckCard(selectedCard))
+                                {
+                                    mpm.PushCard(selectedCard);
+                                    selectedCard.Picked = false;
+                                    selectedCard = null;
                                 };
                             }
                         }
@@ -61,16 +74,16 @@ namespace DefaultNamespace
                         var newPlace = hit.transform;
                         var check = newPlace.GetComponent<ICheckable>();
                         var place = newPlace.GetComponent<IAddtable>();
-                        var krapo = LastPlace.GetComponent<Krapo>();
-                        if (check.CheckCard(SelectedCard))
+                        var Lastkrapo = lastPlace.GetComponent<Krapo>();
+                        if (check.CheckCard(selectedCard))
                         {
-                            place.AddCard(SelectedCard);
-                            SelectedCard.Picked = false;
-                            SelectedCard = null;
+                            place.AddCard(selectedCard);
+                            selectedCard.Picked = false;
+                            selectedCard = null;
                         }
-                        if (krapo!= null && krapo.kDeck.Count!=0)
+                        if (Lastkrapo!= null && Lastkrapo.kDeck.Count!=0)
                         {
-                            krapo.TurnLastCard();
+                            Lastkrapo.TurnLastCard();
                         }
                         else
                         {
@@ -82,19 +95,19 @@ namespace DefaultNamespace
             }
             if (Input.GetMouseButtonUp(1))
             {
-                if (SelectedCard == null)return;
+                if (selectedCard == null)return;
                
-                SelectedCard.Picked = false;
-                if (LastPlace.GetComponent<IAddtable>()!= null)
+                selectedCard.Picked = false;
+                if (lastPlace.GetComponent<IAddtable>()!= null)
                 {
-                    LastPlace.GetComponent<IAddtable>().AddCard(SelectedCard);
+                    lastPlace.GetComponent<IAddtable>().AddCard(selectedCard);
                 }
                 else
                 {
-                    dDeck.AddCard(SelectedCard);
+                    dDeck.AddCard(selectedCard);
                     _tm.ChangeTurns();
                 }
-                SelectedCard = null;
+                selectedCard = null;
             }
         }
     }

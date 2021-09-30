@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   empty: 0
+  MD: {fileID: 2059292312}
 --- !u!4 &518579413
 Transform:
   m_ObjectHideFlags: 0
@@ -877,9 +878,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: 0
   krapo: {fileID: 818156017}
-  SelectedCard: {fileID: 0}
-  LastPlace: {fileID: 0}
+  selectedCard: {fileID: 0}
+  lastPlace: {fileID: 0}
   dDeck: {fileID: 1735747872}
+  mDeck: {fileID: 1922671225}
   mpm: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
@@ -1553,6 +1555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   empty: 0
+  MD: {fileID: 1922671225}
 --- !u!1 &1738121260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,9 +1631,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: 0
   krapo: {fileID: 970995661}
-  SelectedCard: {fileID: 0}
-  LastPlace: {fileID: 0}
+  selectedCard: {fileID: 0}
+  lastPlace: {fileID: 0}
   dDeck: {fileID: 518579412}
+  mDeck: {fileID: 2059292312}
   mpm: {fileID: 0}
 --- !u!4 &1791026570
 Transform:
@@ -1802,6 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04eb651be87247179ba2374c4d3e0780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Empty: 0
   Other: 1
   krapo: {fileID: 818156017}
   CardPrefab: {fileID: 0}
@@ -1877,6 +1882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04eb651be87247179ba2374c4d3e0780, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Empty: 0
   Other: 0
   krapo: {fileID: 970995661}
   CardPrefab: {fileID: 0}

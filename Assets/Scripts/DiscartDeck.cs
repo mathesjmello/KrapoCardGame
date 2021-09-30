@@ -8,6 +8,7 @@ namespace DefaultNamespace
     {
         public bool empty;
         private Stack<Card> _discartDeck = new Stack<Card>();
+        public MainDeck MD;
         [Inject] private LinesManager _lm;
         public void AddCard(Card card)
         {
@@ -20,6 +21,14 @@ namespace DefaultNamespace
         {
             c = empty&&_lm.HaveEmpty ? _discartDeck.Pop() : null;
             return c;
+        }
+
+        public void SendMain()
+        {
+            while (_discartDeck.Count>0)
+            {
+                MD.TurnDeck(_discartDeck.Pop());
+            }
         }
 
         public bool CheckCard(Card c)

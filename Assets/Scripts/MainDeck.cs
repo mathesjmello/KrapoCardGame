@@ -9,6 +9,7 @@ namespace DefaultNamespace
 {
     public class MainDeck: MonoBehaviour, IDeckable, IPickable
     {
+        public bool Empty;
         public bool Other;
         public Krapo krapo;
         public Card CardPrefab;
@@ -56,7 +57,7 @@ namespace DefaultNamespace
             foreach (var card in deck)
             {
                 shuffledDeck.Push(card);
-                card.gameObject.transform.parent = transform;
+                card.SetParent(transform, 0);
             }
             SetKrapo();
         }
@@ -112,10 +113,25 @@ namespace DefaultNamespace
             _tm.PlayerCheck();
         }
 
+        public void TurnDeck(Card c)
+        {
+            shuffledDeck.Push(c);
+            c.SetParent(transform, 0);
+            c.FlipCard();
+            if (Empty)
+            {
+                Empty = false;
+            }
+        }
+
         public Card PickCard(out Card c)
         {
             c = shuffledDeck.Pop();
             c.EnableCard(shuffledDeck.Count);
+            if (shuffledDeck.Count<1)
+            {
+                Empty = true;
+            }
             return c;
         }
     }
