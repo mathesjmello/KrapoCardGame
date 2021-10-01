@@ -11,7 +11,7 @@ namespace DefaultNamespace
         public Krapo krapo;
         public Card selectedCard;
         public Transform lastPlace;
-        public DiscartDeck dDeck;
+        public DiscardDeck dDeck;
         public MainDeck mDeck;
         public MiddlePileManager mpm;
         [Inject] private TurnManager _tm;
@@ -40,65 +40,57 @@ namespace DefaultNamespace
                 {
                     if (selectedCard==null)
                     {
-                        
                         lastPlace = hit.transform;
                         var pick = lastPlace.GetComponent<IPickable>();
                         if (lastPlace.GetComponentInChildren<Card>())
                         {
-                            selectedCard = pick.PickCard(out _);
-                            
-                            if (mDeck.Empty && !_lm.HaveEmpty)
+                            selectedCard = pick.PickCard();
+                            if (mDeck.empty && !_lm.haveEmpty)
                             {
-                                if (selectedCard == null)
-                                {
-                                    dDeck.SendMain();
-                                    return;
-                                }
-                                
+                                dDeck.SendMain();
+                                return;
                             }
-                            if (selectedCard!=null)
+                            selectedCard.picked = true;
+                            selectedCard.PushUp();
+                            if(mpm.CheckCard(selectedCard))
                             {
-                                selectedCard.Picked = true;
-                                selectedCard.PushUp();
-                                if(mpm.CheckCard(selectedCard))
-                                {
-                                    mpm.PushCard(selectedCard);
-                                    selectedCard.Picked = false;
-                                    selectedCard = null;
-                                };
+                                mpm.PushCard(selectedCard);
+                                selectedCard.picked = false;
+                                selectedCard = null;
                             }
                         }
                     }
                     else
                     {
                         var newPlace = hit.transform;
+                        if(newPlace.GetComponent<Krapo>() == krapo) return;
+                        if (newPlace.GetComponent<DiscardDeck>() == dDeck) return;
                         var check = newPlace.GetComponent<ICheckable>();
                         var place = newPlace.GetComponent<IAddtable>();
                         var Lastkrapo = lastPlace.GetComponent<Krapo>();
                         if (check.CheckCard(selectedCard))
                         {
                             place.AddCard(selectedCard);
-                            selectedCard.Picked = false;
+                            selectedCard.picked = false;
                             selectedCard = null;
                         }
-                        if (Lastkrapo!= null && Lastkrapo.kDeck.Count!=0)
+                        if (Lastkrapo!= null && Lastkrapo.Pile.Count!=0)
                         {
                             Lastkrapo.TurnLastCard();
                         }
                         else
                         {
-                            dDeck.empty = true;
+                            dDeck.krapoEmpty = true;
                         }
                     }
-                    
                 }
             }
             if (Input.GetMouseButtonUp(1))
             {
                 if (selectedCard == null)return;
                
-                selectedCard.Picked = false;
-                if (lastPlace.GetComponent<IAddtable>()!= null)
+                selectedCard.picked = false;
+                if (lastPlace.GetComponent<MainDeck>() == null)
                 {
                     lastPlace.GetComponent<IAddtable>().AddCard(selectedCard);
                 }

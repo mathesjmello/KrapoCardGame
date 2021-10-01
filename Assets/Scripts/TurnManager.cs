@@ -27,7 +27,7 @@ namespace DefaultNamespace
 
         public void CheckStart()
         {
-            if (players[0].krapo.kDeck.Peek().num>players[1].krapo.kDeck.Peek().num)
+            if (((StackOfCards) players[0].krapo).Pile.Peek().num>((StackOfCards) players[1].krapo).Pile.Peek().num)
             {
                 players[0].turn = true;
                 Debug.Log("player 1 start");

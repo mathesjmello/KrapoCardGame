@@ -18,7 +18,7 @@ namespace DefaultNamespace
         {
             foreach (var pile in Piles)
             {
-                if (card.num == pile.pile.Count && (int) pile.suits == (int) card.suit)
+                if (card.num == pile.Pile.Count && (int) pile.suits == (int) card.suit)
                 {
                     oneToSend = pile;
                     return true;

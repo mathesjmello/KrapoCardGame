@@ -1,44 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using Zenject;
+﻿using DefaultNamespace;
 
-namespace DefaultNamespace
+public class Krapo : StackOfCards, IPickable, ICheckable
 {
-    public class Krapo : MonoBehaviour, IPickable, ICheckable, IAddtable
 
+    public override void AddCard(Card card)
     {
-    public Stack<Card> kDeck = new Stack<Card>();
-    [Inject] private MiddlePileManager _mpm;
-
-    public void AddCard(Card card)
-    {
-        kDeck.Push(card);
+        Pile.Push(card);
         card.SetParent(transform, 0);
-        card.EnableCard(kDeck.Count);
+        card.ChangeOrder(Pile.Count);
     }
 
     public void TurnLastCard()
     {
-        var lastCard = kDeck.Peek();
-        lastCard.EnableCard(kDeck.Count);
+        var lastCard = Pile.Peek();
+        lastCard.ChangeOrder(Pile.Count);
     }
 
-    public Card PickCard(out Card c)
+    public Card PickCard()
     {
-        c = kDeck.Pop();
+        var c = Pile.Pop();
         return c;
     }
 
     public bool CheckCard(Card c)
     {
-        var topCard = kDeck.Peek();
+        var topCard = Pile.Peek();
         if (c.suit == topCard.suit && (c.num == topCard.num - 1 || c.num == topCard.num + 1))
         {
             return true;
         }
-
         return false;
-    }
     }
 }

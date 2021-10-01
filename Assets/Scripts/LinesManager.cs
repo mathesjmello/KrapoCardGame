@@ -7,17 +7,17 @@ namespace DefaultNamespace
 {
     public class LinesManager: MonoBehaviour
     {
-        public List<Line> Lines = new List<Line>();
-        public bool HaveEmpty;
+        public List<Line> lines = new List<Line>();
+        public bool haveEmpty;
 
         private void Start()
         {
-            Lines = FindObjectsOfType<Line>().ToList();
+            lines = FindObjectsOfType<Line>().ToList();
         }
 
         public void CheckFree()
         {
-            HaveEmpty = Lines.Find(line => line.empty);
+            haveEmpty = lines.Find(line => line.empty);
         }
     }
 }
